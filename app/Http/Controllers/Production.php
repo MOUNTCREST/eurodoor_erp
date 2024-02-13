@@ -1316,6 +1316,7 @@ else{
         ->leftJoin('doorthicknesses', 'measurement_items.door_thickness_id', '=', 'doorthicknesses.id')
         ->where("measurement_items.m_id", "=", $id)
         ->where("measurement_items.delete_status", "=", "0")
+        ->where("measurement_items.production_status", "=", 'Production Completed')
         ->get();
 
 

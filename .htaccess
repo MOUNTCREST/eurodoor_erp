@@ -1,20 +1,18 @@
 <IfModule mod_rewrite.c>
-  <IfModule mod_negotiation.c>
-      Options -MultiViews
-  </IfModule>
-  
-  RewriteEngine On
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
 
-  # Redirect Trailing Slashes...
-  RewriteRule ^(.*)/$ /$1 [L,R=301]
+    RewriteEngine On
 
-  # Handle Front Controller...
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteRule ^ index.php [L]
+    RewriteCond %{REQUEST_FILENAME} -d [OR]
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ ^$1 [N]
 
-<Files .env>
-  Order allow,deny
-  Deny from all
-</Files>
+    RewriteCond %{REQUEST_URI} (\.\w+$) [NC]
+    RewriteRule ^(.*)$ public/$1 
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ server.php
 </IfModule>
