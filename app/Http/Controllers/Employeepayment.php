@@ -80,7 +80,11 @@ class Employeepayment extends Controller
             'amount' => 'required',
         ]);
 
-
+        $data_ref =  DB::table('employee_accounts')
+        ->where('company_id', '=', Session::get('company_id'))
+        ->where("employee_accounts.type", "=", "payment")
+        ->get();
+        
         if(empty($data_ref)){
             $num = 0;
          }
